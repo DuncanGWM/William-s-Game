@@ -1,0 +1,54 @@
+<!--
+README / How to run:
+1) From this folder, run: python3 -m http.server 8000
+2) Open http://localhost:8000 in your browser
+3) Use Arrow keys or WASD to play.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>W Snake</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="hud" aria-label="Game stats">
+      <h1>W Snake</h1>
+      <div class="hud-stats">
+        <p>Score: <span id="score">0</span></p>
+        <p>Background: <span id="bg-index">1</span></p>
+        <p>Level: <span id="level">1</span></p>
+      </div>
+    </header>
+
+    <section class="board-wrap" aria-label="Snake game board">
+      <canvas id="game" width="640" height="640" aria-label="Snake playfield"></canvas>
+      <div class="bg-fade" id="bg-fade" aria-hidden="true"></div>
+      <div class="pop-text" id="pop-text" aria-hidden="true">W +1</div>
+
+      <div id="game-over" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="game-over-title">
+        <div class="overlay-card">
+          <h2 id="game-over-title">Game Over</h2>
+          <p>You collected <strong><span id="final-score">0</span></strong> Ws.</p>
+          <button id="restart-btn" type="button">Restart</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls-row">
+      <label for="speed-select">Speed:</label>
+      <select id="speed-select" aria-label="Snake speed">
+        <option value="easy">Easy</option>
+        <option value="normal" selected>Normal</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+
+    <p class="instructions">Controls: Arrow keys or WASD</p>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

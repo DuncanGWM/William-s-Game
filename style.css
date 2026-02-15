@@ -150,24 +150,6 @@ button {
   color: #07110b;
 }
 
-
-.controls-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0.25rem 0 0.4rem;
-  font-weight: 600;
-}
-
-#speed-select {
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 0.25rem 0.45rem;
-  background: rgba(8, 12, 24, 0.85);
-  color: var(--text);
-}
-
 .instructions {
   margin: 0;
   text-align: center;

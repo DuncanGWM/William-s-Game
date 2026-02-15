@@ -9,15 +9,10 @@ const restartBtn = document.getElementById('restart-btn');
 const popText = document.getElementById('pop-text');
 const bgFade = document.getElementById('bg-fade');
 const boardWrap = document.querySelector('.board-wrap');
-const speedSelect = document.getElementById('speed-select');
 
 const GRID_SIZE = 20;
 const CELL_SIZE = canvas.width / GRID_SIZE;
-const SPEED_PRESETS = {
-  easy: 165,
-  normal: 115,
-  hard: 85
-};
+const TICK_MS = 115;
 
 // Easy-to-replace background set.
 const BACKGROUND_IMAGES = [
@@ -38,8 +33,7 @@ const state = {
   accumulator: 0,
   lastFrameTime: 0,
   backgroundIndex: 0,
-  audioCtx: null,
-  tickMs: SPEED_PRESETS.normal
+  audioCtx: null
 };
 
 function resetGame() {
@@ -55,7 +49,6 @@ function resetGame() {
   state.accumulator = 0;
   state.lastFrameTime = 0;
   state.backgroundIndex = 0;
-  state.tickMs = SPEED_PRESETS[speedSelect.value] || SPEED_PRESETS.normal;
   applyBackground(0, false);
   scoreEl.textContent = '0';
   bgIndexEl.textContent = '1';
@@ -126,10 +119,6 @@ window.addEventListener('keydown', (event) => {
 
 restartBtn.addEventListener('click', resetGame);
 
-speedSelect.addEventListener('change', () => {
-  state.tickMs = SPEED_PRESETS[speedSelect.value] || SPEED_PRESETS.normal;
-});
-
 // Fixed-step simulation with frame-time accumulator for consistent movement,
 // even if rendering briefly stalls.
 function gameLoop(timestamp) {
@@ -143,9 +132,9 @@ function gameLoop(timestamp) {
   if (state.running) {
     state.accumulator += frameDelta;
 
-    while (state.accumulator >= state.tickMs && state.running) {
+    while (state.accumulator >= TICK_MS && state.running) {
       update();
-      state.accumulator -= state.tickMs;
+      state.accumulator -= TICK_MS;
     }
 
     render();
